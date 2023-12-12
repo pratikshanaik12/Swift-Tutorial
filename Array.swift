@@ -8,6 +8,12 @@ let nums = [1,2,3,4,5]
 print(nums.first!)
 print(nums.last!)
 
+// How to get index of a num in an array
+var x = nums.firstIndex(of: 3)
+print("Index of 3 is \(x!)")
+
+
+
 // Replace -1 with your desired default value
 // nil coalescing operator
 let firstNum = nums.first ?? -1 
@@ -18,10 +24,27 @@ print(nums.count)
 print(nums.map(-))
 print("===========================")
 var mutatingArr = [1,2,3,4,5,8]
+
+// Shuffle
+mutatingArr.shuffle()
+print("Arr after shuffling is \(mutatingArr)")
+
+
+// Sort
+mutatingArr.sort()
+print("Array after sorting is \(mutatingArr)")
+
+// Append
 mutatingArr.append(9)
 print(mutatingArr)
+
+// Insert
 mutatingArr.insert(0, at: 0)
 print(mutatingArr) 
+
+// Remove
+mutatingArr.remove(at: 3)
+print("The mutated array after removing 3rd index is \(mutatingArr)")
 mutatingArr.insert(contentsOf: [6,7], at : 6)
 print(mutatingArr)
 print("===========================")
