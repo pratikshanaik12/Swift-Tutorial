@@ -1,0 +1,68 @@
+func noArgumentAndNoReturnValue(){
+  print("I don't know what I'm doing")
+}
+
+noArgumentAndNoReturnValue()
+
+func plusTwo(value: Int){
+  let newValue = value + 2
+  print(newValue)
+}
+
+plusTwo(value: 30)
+
+func newPlusTwo(value: Int) -> Int{
+  value + 2
+}
+
+print(newPlusTwo(value: 30))
+
+func customAdd(value1: Int, value2: Int) -> Int{
+  value1 + value2
+}
+
+let customAdded = customAdd(value1: 10, value2: 20)
+print(customAdded)
+
+
+func labels(external1 internal1: Int, external2 internal2: Int) -> Int{
+  internal1 - internal2
+}
+
+print(labels(external1: 10, external2: 5))
+
+func minus(_ lhs: Int, _ rhs: Int) -> Int{
+  lhs - rhs
+}
+
+print(minus(20,10))
+
+// Can discard the Result
+@discardableResult
+func myCustomAdd(_ lhs: Int, _ rhs: Int) -> Int{
+  lhs + rhs
+}
+myCustomAdd(20,20)
+
+// Nested Funcs
+func doSomethingComplicated(with value: Int) -> Int {
+  
+  func mainLogic(value: Int) -> Int{
+    value + 2
+  }
+  
+  return mainLogic(value: value+3)
+}
+
+print(doSomethingComplicated(with: 30))
+
+
+func getFullName(firstName: String = "Foo", lastName: String = "Bar") -> String{
+  "\(firstName) \(lastName)"
+}
+
+print(getFullName())
+print(getFullName(firstName: "Aunt", lastName: "May"))
+print(getFullName(firstName: "Jane"))
+
+
