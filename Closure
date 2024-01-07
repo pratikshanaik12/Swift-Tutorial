@@ -1,0 +1,73 @@
+// CLOSURE - in line args passed to another function - func which are in line without func keywords
+
+let add: (Int, Int) -> Int = {
+  (lhs: Int, rhs: Int) -> Int in
+  lhs+rhs
+}
+
+print(add(20,30))
+
+func customAdd(_ lhs: Int, _ rhs: Int, using function: (Int, Int) -> Int) -> Int{
+  function(lhs,rhs)
+}
+
+// trailing closure synatax
+// print(customAdd(20, 30) {
+//   (lhs: Int, rhs: Int) -> Int in 
+//   lhs+rhs
+// })
+
+// Can also be written like this :
+print(customAdd(20, 30, 
+                using: { 
+                        (lhs: Int, rhs: Int) -> Int in lhs+rhs 
+                }
+               )
+     )
+
+// Cleaning the code - tends to run slower due to less details available for the compiler
+print(customAdd(20, 20, 
+            using: { 
+                    (lhs, rhs) in lhs+rhs 
+            }
+           )
+ )
+
+// Can do like this as well
+print(customAdd(20, 10) {$0+$1})
+
+let ages = [30, 20, 19, 40]
+
+print(ages.sorted(by:<))
+print(ages.sorted(by:>))
+
+func customAdd2 (using function: (Int, Int) -> Int, _ lhs: Int, _ rhs: Int) -> Int{
+  function(lhs,rhs)
+}
+
+print(customAdd2(using: {lhs, rhs in lhs+rhs}, 20, 25))
+
+print(customAdd2(using: {$0 + $1 + 10}, 1, 2))
+
+
+
+
+
+
+func add10To(value: Int) -> Int{
+  value+10
+}
+
+func add20To(_ value: Int) -> Int{
+  value+20
+}
+
+func doAddition(
+  on value: Int,
+  using function: (Int) -> Int
+) -> Int{
+  function(value)
+}
+
+print(doAddition(on: 10, using: add10To(value:)))
+print(doAddition(on: 20, using: add20To(_:)))
