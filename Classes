@@ -1,0 +1,63 @@
+// Classes
+
+class Person{
+  var name: String
+  var age: Int
+  init(name:String, age: Int){
+    self.name = name
+    self.age = age
+  }
+
+  func incAge(){
+    self.age += 1
+  }
+}
+
+let foo = Person(name:"Foo", age: 29)
+print(foo.age)
+foo.incAge()
+print(foo.age)
+
+let bar = foo
+bar.incAge()
+print(bar.age)
+
+// not used so often
+if foo === bar{
+  print("foo and bar point to same memory")
+} else{
+  print("does not point to same memory")
+}
+
+
+
+class Vehicle{
+  func goVroom(){
+    print("vroom vroom")
+  }
+}
+
+class Car: Vehicle{
+  
+}
+
+let car = Car()
+car.goVroom()
+
+
+class Person2{
+  private(set) var age:Int
+  init(age: Int){
+    self.age = age
+  }
+  func increaseAge(){
+    self.age += 1
+  }
+}
+let baz = Person2(age:20)
+print(baz.age)
+// baz.age += 1 => will give an error
+baz.increaseAge()
+print(baz.age)
+
+
