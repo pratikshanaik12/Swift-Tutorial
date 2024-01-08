@@ -1,0 +1,166 @@
+import Foundation
+// Enumerations - categorization of similar values by name
+
+enum Animals{
+  case cat
+  case dog
+  case rabbit
+  // can also be written like this 
+  // case cat, dog, rabbit
+}
+
+let cat = Animals.cat
+print(cat)
+
+if cat == Animals.cat{
+  print("This is a cat")
+} else if cat == Animals.dog{
+  print("This is a dog")
+} else {
+  print("This is something else")
+}
+
+// use default only when you are skipping cases
+// add cases when added to enum
+// example if you add case hedgeHog to enum, make sure to add the case to switch as well
+
+switch cat{
+  case .cat:
+  print("This is a cat")
+  break
+  case .dog:
+  print("This is a dog")
+  break
+  case .rabbit:
+  print("This is a rabbit")
+  break
+}
+
+
+// Assiociated Values - added dynamically at the time of creation
+
+enum Shortcut{
+  case fileOrFolder (path: URL, name: String)
+  case wwwUrl(path: URL) 
+  case song (artist: String, songName: String)
+}
+
+let wwwApple = Shortcut.wwwUrl(
+                               path: URL(string: "https://apple.com")!
+)
+
+switch wwwApple{
+  case .fileOrFolder(let path,let name):
+  print(path)
+  print(name)
+
+
+  case .wwwUrl(let path):
+  print(path)
+
+
+  case .song(let artist, let songName): 
+  print(artist)
+  print(songName)
+
+}
+
+
+if case let .wwwUrl(path) = wwwApple{
+  print(path)
+}
+
+let withoutYou = Shortcut.song(artist: "Symphony X", songName: "Without You")
+
+if case let .song(_, songName) = withoutYou {print(songName)}
+
+
+enum Vehicle{
+  case car(manufacturer: String, model: String)
+  case bike(manufacturer: String, yearMade: Int)
+}
+
+func getManufacturer(from vehicle: Vehicle) -> String{
+  switch vehicle{
+    case let .car(manufacturer, _):
+    return manufacturer
+
+    case let .bike(manufacturer, _):
+    return manufacturer
+
+  }
+}
+
+let car = Vehicle.car(manufacturer: "Tesla", model: "X")
+print(getManufacturer(from: car))
+let bike = Vehicle.bike(manufacturer: "HD", yearMade: 1987)
+print(getManufacturer(from: bike))
+
+
+// raw values
+enum FamilyMembers: String, CaseIterable {
+  case father = "Dad"
+  case mother = "Mom"
+  case brother = "Bro"
+  case sister = "Sis"
+}
+
+print(FamilyMembers.father.rawValue)
+
+// iterate over enum
+for member in FamilyMembers.allCases {
+    print(member)
+}
+
+// mutating func on enum
+enum Height{
+  case short, medium, long
+  mutating func makeLong(){
+    self = Height.long
+  }
+}
+
+var myHeight = Height.medium
+myHeight.makeLong()
+print(myHeight)
+
+
+// recursive enums
+// very rare
+
+indirect enum IntOp{
+  case add(Int, Int)
+  case sub(Int, Int)
+  case freeHand(IntOp)
+
+  func calcRes(of op: IntOp? = nil)-> Int
+  {
+    switch op ?? self{
+      
+      case let .add(lhs, rhs):
+      return lhs+rhs
+
+      case let .sub(lhs, rhs):
+      return lhs-rhs
+
+      case let .freeHand(op):
+      return calcRes(of: op)
+    }
+  }
+}
+
+let freeHand = IntOp.freeHand(.add(2,4))
+print(freeHand.calcRes())
+
+
+
+
+
+
+
+
+
+
+
+
+
