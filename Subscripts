@@ -1,0 +1,200 @@
+// Subscripts - shortcuts for accessing elements of a collection
+
+
+
+// 1. Read Write Subscript
+
+
+
+struct MyList{
+
+    var values: [Int] = []
+
+    
+
+    subscript(index: Int) -> Int{
+
+        
+
+        get{
+
+            return values[index]
+
+        }
+
+        
+
+        set{
+
+            values[index] = newValue
+
+        }
+
+    }
+
+}
+
+
+
+var myList = MyList()
+
+myList.values = [1,2,3]
+
+myList[2]
+
+
+
+// Read-Only Subscript
+
+
+
+struct daysOfTheWeek{
+
+    var myDays = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"]
+
+    
+
+    subscript(index: Int)-> String{
+
+        
+
+        get {
+
+            return myDays[index]
+
+        }
+
+    }
+
+}
+
+
+
+var days = daysOfTheWeek()
+
+days[0]
+
+
+
+
+
+// Subscript Overloading
+
+
+
+class Person{
+
+    var contacts: [String: String]
+
+    
+
+    init(_ contacts: [String: String]){
+
+        self.contacts = contacts
+
+    }
+
+    
+
+    subscript(name: String)-> String?{
+
+        
+
+        get{
+
+            return contacts[name]
+
+        }
+
+        
+
+        set{
+
+            contacts[name] = newValue
+
+        }
+
+    }
+
+    
+
+    subscript(firstName: String, lastName: String) -> String?{
+
+        get{
+
+            return contacts["\(firstName) \(lastName)"]
+
+        }
+
+        
+
+        set{
+
+            contacts["\(firstName) \(lastName)"] = newValue
+
+        }
+
+    }
+
+}
+
+
+
+
+
+var person = Person(["John Doe" : "123", "Jane Frost" : "456", "Selena Gomez": "789"])
+
+person["John", "Doe"] ?? "Not found"
+
+person["Selena Gomez"] ?? "Not found"
+
+person["Taylor Swift"] = "1989"
+
+
+
+
+
+// Type Subscript
+
+
+
+class MathConst{
+
+//    a subscript of type class can access only static properties and not instance properties
+
+    static let const : [String: Double] = [
+
+        "pi" : 3.14,
+
+        "e" : 2.71
+
+    ]
+
+    
+
+    class subscript(key: String) -> Double?{
+
+        return const[key]
+
+    }
+
+}
+
+
+
+if var pi = MathConst["pi"] {
+
+    pi
+
+}
+
+
+
+if var e = MathConst["e"]{
+
+    e
+
+}
+
+
+
